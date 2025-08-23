@@ -69,83 +69,76 @@ export default function FAQ() {
   }
 
   return (
-    <section className="py-12 bg-white animate-float">
+    <section className="py-12 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Left side - Content */}
-          <div className="transform transition-all duration-500 hover:scale-105">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5 animate-pulse">
-              {t("faqTitle")} <span className="text-red-600 animate-bounce">{t("faqSubtitle")}</span>
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">
+              {t("faqTitle")} <span className="text-red-600">{t("faqSubtitle")}</span>
             </h2>
-            <div className="prose prose-base text-gray-600 mb-6 transform transition-all duration-300 hover:text-gray-800">
-              <p className="text-sm leading-relaxed">
+            <div className="prose prose-base text-gray-600 mb-6">
+              <p className="text-sm leading-relaxed mb-4">
                 Pour tous vos déplacements en Algérie, nous proposons un service de location voiture avec chauffeur.
                 Notre agent vous attend à l'aéroport et vous prend en charge quel que soit le nombre de personnes. Vous
                 pouvez compter sur nous pour vos navette aéroport hôtel vers les différentes villes algériennes à des
                 prix abordables.
               </p>
-              <p className="text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed mb-4">
                 Nous mettons à votre disposition les simples ou les luxueuses berlines, les 4x4 de luxes, les minis bus
                 et même les autocars. Visitez notre site web spécialement dédié à ce service en cliquant sur
                 AlgerieTransfert.com
               </p>
-              <p className="text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed mb-4">
                 Pour tous vos déplacements en Algérie, nous proposons un service de location voiture avec chauffeur.
                 Notre agent vous attend à l'aéroport et vous prend en charge quel que soit le nombre de personnes. Vous
                 pouvez compter sur nous pour vos navette aéroport hôtel vers les différentes villes algériennes à des
                 prix abordables.
               </p>
-              <p className="text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed mb-6">
                 Nous mettons à votre disposition les simples ou les luxueuses berlines, les 4x4 de luxes, les minis bus
                 et même les autocars. Visitez notre site web spécialement dédié à ce service en cliquant sur
                 AlgerieTransfert.com
               </p>
             </div>
-            <div className="text-center transform transition-all duration-300 hover:scale-110">
-              <Link href="/agences">
-                <Button className="bg-orange-100 hover:bg-orange-200 text-black text-opacity-70 px-6 py-2 text-sm border-0 shadow-none transition-all duration-300 hover:shadow-lg hover:scale-105 animate-pulse">
-                  {t("readMore")}
-                </Button>
+            <div>
+              <Link href="/agences" className="text-orange-500 hover:text-orange-600 text-sm underline font-medium transition-colors duration-200">
+                {t("readMore")}
               </Link>
             </div>
           </div>
 
           {/* Right side - FAQ Accordion */}
-          <div className="space-y-2">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                <button
-                  onClick={() => toggleFAQ(index)}
-                  className={`w-full px-5 py-3 text-left flex justify-between items-center transition-all duration-300 ${
-                    openIndex === index
-                      ? "bg-blue-600 text-white transform scale-105"
-                      : "bg-white hover:bg-gray-50 text-gray-900 hover:scale-102"
-                  }`}
-                >
-                  <span className="font-medium pr-4 text-sm transition-all duration-300">{faq.question}</span>
-                  <div className="flex-shrink-0 transition-transform duration-300">
-                    {openIndex === index ? (
-                      <ChevronDown className="h-4 w-4 animate-spin" />
-                    ) : (
-                      <ChevronRight className="h-4 w-4 hover:scale-125" />
-                    )}
-                  </div>
-                </button>
-                {openIndex === index && (
-                  <div className="px-5 py-3 bg-blue-50 border-t border-blue-100 animate-slideDown">
-                    <p className="text-gray-700 leading-relaxed mb-2 text-sm transition-all duration-300 hover:text-gray-900">{faq.answer}</p>
-                    <p className="text-xs text-gray-600 mb-3 transition-all duration-300 hover:text-gray-800">{faq.moreInfo}</p>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="text-blue-600 border-blue-600 hover:bg-blue-50 bg-transparent text-xs transition-all duration-300 hover:scale-105 hover:shadow-md"
+          <div className="space-y-1">
+            {faqs.map((faq, index) => {
+              const isOpen = openIndex === index;
+              
+              return (
+                <div key={index} className="relative">
+                  <button
+                    onClick={() => toggleFAQ(index)}
+                    className="w-full bg-white border border-blue-200 text-left flex items-center hover:bg-gray-50 transition-colors duration-200 relative overflow-hidden"
+                  >
+                    <span className="flex-1 px-5 py-4 font-medium text-gray-900 text-sm pr-20">{faq.question}</span>
+                    {/* Parallélogramme bleu */}
+                    <div 
+                      className="absolute right-0 top-0 bottom-0 w-16 bg-blue-600 flex items-center justify-center"
+                      style={{
+                        clipPath: 'polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%)'
+                      }}
                     >
-                      {t("learnMore")} →
-                    </Button>
-                  </div>
-                )}
-              </div>
-            ))}
+                      <ChevronRight className="h-4 w-4 text-white ml-2" />
+                    </div>
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 py-4 bg-blue-50 border-l border-r border-b border-blue-200">
+                      <p className="text-gray-700 text-sm leading-relaxed mb-2">{faq.answer}</p>
+                      <p className="text-xs text-gray-600 mb-3">{faq.moreInfo}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

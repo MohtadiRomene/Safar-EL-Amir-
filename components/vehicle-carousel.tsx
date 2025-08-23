@@ -77,29 +77,33 @@ export default function VehicleCarousel() {
     <section className="py-12 bg-white animate-float">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-            {t("discoverFleet")} <span className="text-red-600">Safar El Amir</span>
+          <h2 className="text-2xl md:text-3xl font-[750] text-gray-900 tracking-tight leading-snug mb-4 font-[Arial] sticky top-0 z-50">
+            {t("discoverFleet")} <span className="text-[rgb(255,18,54)] font-[750]">Safar El Amir</span>
           </h2>
 
           {/* Filter Tabs */}
           <div className="flex flex-wrap justify-center gap-2 mb-6">
-            {filters.map((filter) => (
-              <button
-                key={filter.id}
-                onClick={() => {
-                  setActiveFilter(filter.id)
-                  setCurrentSlide(0)
-                }}
-                className={`px-5 py-2 text-sm font-bold transition-all duration-200 hover:scale-105 ${
-                  activeFilter === filter.id
-                    ? "bg-blue-900 text-white clip-path-arrow"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300 hover:shadow-md"
-                }`}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
+  {filters.map((filter) => (
+    <button
+      key={filter.id}
+      onClick={() => {
+        setActiveFilter(filter.id)
+        setCurrentSlide(0)
+      }}
+      className={`px-6 py-2 text-sm font-bold transition-all duration-200 hover:scale-105
+        ${activeFilter === filter.id
+          ? "bg-[rgb(0,13,107)] text-white"
+          : "bg-gray-100 text-black hover:bg-gray-200"
+        }`}
+      style={{
+        clipPath: "polygon(10% 0, 100% 0, 90% 100%, 0% 100%)"
+      }}
+    >
+      {filter.label}
+    </button>
+  ))}
+</div>
+
         </div>
 
         {/* Vehicle Carousel */}

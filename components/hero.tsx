@@ -213,10 +213,8 @@ export default function Hero() {
           <br></br>
           <br></br>
           <br></br> 
-          <br></br>
-          <br></br>
           <AnimatedSection animation="fadeInUp" delay={1000} persistent={true}>
-          <div className="flex flex-row justify-center items-center gap-36 p">
+          <div className="flex flex-row justify-center items-center gap-32 p">
   {/* Élément 1 */}
   <div className="flex items-center gap-2">
     <span className="text-green-500 font-bold text-xl">✓</span>

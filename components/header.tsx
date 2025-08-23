@@ -1,10 +1,10 @@
 "use client"
 
-import type React from "react"
+import React from "react"
 
-import { useState, createContext, useContext } from "react"
+import { useState, createContext, useContext, useEffect } from "react"
 import { Menu, X, Globe, User, Lock, ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button } from "./ui/button"
 import Link from "next/link"
 
 // Context pour la traduction globale
@@ -12,6 +12,7 @@ const LanguageContext = createContext({
   language: "FR",
   setLanguage: (lang: string) => {},
   t: (key: string) => key,
+  isClient: false,
 })
 
 const translations = {
@@ -185,12 +186,21 @@ const translations = {
 
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
   const [language, setLanguage] = useState("FR")
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const t = (key: string) => {
     return translations[language as keyof typeof translations]?.[key as keyof typeof translations.FR] || key
   }
 
-  return <LanguageContext.Provider value={{ language, setLanguage, t }}>{children}</LanguageContext.Provider>
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t, isClient }}>
+      {children}
+    </LanguageContext.Provider>
+  )
 }
 
 export const useLanguage = () => useContext(LanguageContext)
@@ -199,7 +209,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLangOpen, setIsLangOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
-  const { language, setLanguage, t } = useLanguage()
+  const { language, setLanguage, t, isClient } = useLanguage()
 
   const navItems = [
     { name: t("models"), href: "/modeles" },
