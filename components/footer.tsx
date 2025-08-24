@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Phone, Facebook, Instagram, Send } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button } from "./ui/button"
 import Link from "next/link"
 import { useLanguage } from "./header"
 
@@ -11,29 +11,29 @@ export default function Footer() {
 
   const blogPosts = [
     {
-      title: "Sétif: Perle de l'Est Algérien - Guide de Voyage",
+      title: t("blogPost1"),
       image: "https://thumbs.dreamstime.com/b/setif-city-aerial-view-setif-city-center-algeria-265113510.jpg",
       date: "05/07/2019",
     },
     {
-      title: "Jijel: Mini Guide pour une Escapade Côtière",
+      title: t("blogPost2"),
       image: "https://image.shutterstock.com/image-photo/beautiful-landscape-lake-reflection-blue-600w-2614398167.jpg",
       date: "05/07/2019",
     },
     {
-      title: "L'Aéroport d'Alger Houari-Boumédiène : le 3ème plus important aéroport en Afrique",
+      title: t("blogPost3"),
       image: "https://tarasmulticulturaltable.com/wp-content/uploads/2013/09/Kefta-Mkaouara-1-of-2-e1673719913422.jpg",
       date: "05/07/2019",
     },
   ]
 
   const serviceLinks = [
-    "Contactez-nous",
-    "Témoignages clients",
-    "Charte & confidentialité",
-    "Mentions légales",
-    "Conditions de location",
-    "Conditions d'annulation",
+    t("contactUs"),
+    t("customerTestimonials"),
+    t("charterPrivacy"),
+    t("legalNotices"),
+    t("rentalConditionsFooter"),
+    t("cancellationConditions"),
   ]
 
   return (
@@ -47,33 +47,33 @@ export default function Footer() {
         style={{ backgroundImage: "url('/images/map-alger.jpg')" }}
       ></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12">
           {/* Address Column */}
           <div>
-            <h3 className="text-base font-bold text-gray-900 mb-4 relative">
+            <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-3 sm:mb-4 relative">
               {t("address")}
               <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-red-500"></div>
             </h3>
-            <div className="mb-8">
-              <p className="text-gray-600 leading-relaxed text-xs">
-                Nous sommes présents sur plusieurs aéroports en Algérie: aéroport d'Alger, Oran, Tlemcen, Chlef, Constantine, Sétif, Annaba, Jijel, Skikda, Biskra, Bejaia et Batna.
+            <div className="mb-6 sm:mb-8">
+              <p className="text-gray-600 leading-relaxed text-xs sm:text-sm">
+                {t("footerAddress")}
               </p>
             </div>
 
             {/* Newsletter */}
             <div>
-              <h4 className="font-bold text-gray-900 mb-4 relative text-sm">
+              <h4 className="font-bold text-gray-900 mb-3 sm:mb-4 relative text-xs sm:text-sm">
                 {t("newsletter")}
                 <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-red-500"></div>
               </h4>
               <div className="flex bg-white rounded border border-gray-200 overflow-hidden shadow-sm">
                 <input
                   type="email"
-                  placeholder="E-mail"
-                  className="flex-1 px-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none text-xs bg-transparent"
+                  placeholder={t("emailPlaceholder")}
+                  className="flex-1 px-3 sm:px-4 py-2 text-gray-700 placeholder-gray-400 focus:outline-none text-xs sm:text-sm bg-transparent"
                 />
-                <Button className="bg-orange-500 hover:bg-orange-600 px-3 py-2 rounded-none border-0 shadow-none">
+                <Button className="bg-orange-500 hover:bg-orange-600 px-2 sm:px-3 py-2 rounded-none border-0 shadow-none">
                   <Send className="h-3 w-3 text-white" />
                 </Button>
               </div>
@@ -82,16 +82,16 @@ export default function Footer() {
 
           {/* Customer Service Column */}
           <div>
-            <h3 className="text-base font-bold text-gray-900 mb-4 relative">
+            <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-3 sm:mb-4 relative">
               {t("serviceClient")}
               <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-red-500"></div>
             </h3>
-            <div className="space-y-2 mb-8">
+            <div className="space-y-1 sm:space-y-2 mb-6 sm:mb-8">
               {serviceLinks.map((link, index) => (
                 <Link
                   key={index}
                   href="#"
-                  className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 text-xs"
+                  className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 text-xs sm:text-sm"
                 >
                   {link}
                 </Link>
@@ -100,28 +100,28 @@ export default function Footer() {
 
             {/* Social Media */}
             <div>
-              <h4 className="font-bold text-gray-900 mb-4 relative text-sm">
+              <h4 className="font-bold text-gray-900 mb-3 sm:mb-4 relative text-xs sm:text-sm">
                 {t("followUs")}
                 <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-red-500"></div>
               </h4>
               <div className="flex space-x-2">
                 <a
                   href="#"
-                  className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-200"
+                  className="w-7 h-7 sm:w-8 sm:h-8 bg-blue-600 rounded flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-200"
                 >
-                  <Facebook className="h-4 w-4" />
+                  <Facebook className="h-3 w-3 sm:h-4 sm:w-4" />
                 </a>
                 <a
                   href="#"
-                  className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded flex items-center justify-center text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-200"
+                  className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded flex items-center justify-center text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-200"
                 >
-                  <Instagram className="h-4 w-4" />
+                  <Instagram className="h-3 w-3 sm:h-4 sm:w-4" />
                 </a>
                 <a
                   href="https://wa.me/1234567890"
-                  className="w-8 h-8 bg-green-500 rounded flex items-center justify-center text-white hover:bg-green-600 transition-colors duration-200"
+                  className="w-7 h-7 sm:w-8 sm:h-8 bg-green-500 rounded flex items-center justify-center text-white hover:bg-green-600 transition-colors duration-200"
                 >
-                  <Phone className="h-4 w-4" />
+                  <Phone className="h-3 w-3 sm:h-4 sm:w-4" />
                 </a>
               </div>
             </div>
@@ -129,11 +129,11 @@ export default function Footer() {
 
           {/* Blog Column */}
           <div>
-            <h3 className="text-base font-bold text-gray-900 mb-4 relative">
+            <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-3 sm:mb-4 relative">
               {t("blog")}
               <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-red-500"></div>
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {blogPosts.map((post, index) => (
                 <Link key={index} href="#" className="block group">
                   <div className="flex space-x-2">
@@ -141,7 +141,7 @@ export default function Footer() {
                       <img
                         src={post.image || "/placeholder.svg"}
                         alt={post.title}
-                        className="w-16 h-12 object-cover rounded group-hover:opacity-80 transition-opacity duration-200"
+                        className="w-12 h-9 sm:w-16 sm:h-12 object-cover rounded group-hover:opacity-80 transition-opacity duration-200"
                         loading="lazy"
                       />
                     </div>

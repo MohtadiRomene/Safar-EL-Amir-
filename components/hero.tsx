@@ -1,52 +1,52 @@
 "use client"
 
-import type React from "react"
-import AnimatedSection from "./animated-section"
+import React from "react"
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
+import { Button } from "./ui/button"
 import { useLanguage } from "./header"
+import { motion } from "framer-motion"
 
 export default function Hero() {
   const { t } = useLanguage()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [formData, setFormData] = useState({
     agence: "",
-    dateDepart: "04 août 2025",
+    dateDepart: "24 août 2025",
     heureDepart: "10:00",
-    dateRetour: "07 août 2025",
+    dateRetour: "27 août 2025",
     heureRetour: "10:00",
   })
 
   const backgroundImages = [
     {
       src: "/images/hero-slider-bridge.jpg",
-      alt: "Pont suspendu entre des falaises",
-      title: "Pont suspendu spectaculaire"
+      alt: t("backgroundImage1"),
+      title: t("backgroundImage1")
     },
     {
       src: "/images/hero-slider-monument.jpg", 
-      alt: "Monument entouré de palmiers",
-      title: "Monument historique d'Alger"
+      alt: t("backgroundImage2"),
+      title: t("backgroundImage2")
     },
     {
       src: "/images/hero-slider-port.jpg",
-      alt: "Port maritime",
-      title: "Vue panoramique du port"
+      alt: t("backgroundImage3"),
+      title: t("backgroundImage3")
     },
     {
-      src: "/images/tower.jpg", // Using existing tower image as 4th slide
-      alt: "Tour près d'une côte",
-      title: "Tour côtière"
+      src: "/images/tower.jpg",
+      alt: t("backgroundImage4"),
+      title: t("backgroundImage4")
     }
   ]
 
   const agences = [
     t("findAgency"),
-    "Tlemcen - Aéroport Messali El Hadj",
-    "Oran - Aéroport Ahmed Ben Bella",
-    "Alger - Aéroport Houari Boumediene",
-    "Constantine - Aéroport Mohamed Boudiaf",
-    "Chlef - Aéroport",
+    t("airportTlemcen"),
+    t("airportOran"),
+    t("airportAlger"),
+    t("airportConstantine"),
+    t("airportChlef"),
   ]
 
   // Auto-rotate background every 5 seconds
@@ -64,7 +64,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative h-[75vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
+    <section className="relative h-[70vh] sm:h-[75vh] md:h-[80vh] lg:h-[85vh] flex items-center justify-center overflow-hidden">
       {/* Dynamic Background Carousel */}
       <div className="absolute inset-0">
         {backgroundImages.map((image, index) => (
@@ -91,17 +91,17 @@ export default function Hero() {
       </div>
 
       {/* Background slide indicators */}
-      <div className="absolute bottom-6 left-6 z-20 flex space-x-2">
+      <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 z-20 flex space-x-2">
         {backgroundImages.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
               index === currentSlide 
                 ? "bg-white scale-110 shadow-lg" 
                 : "bg-white/50 hover:bg-white/75"
             }`}
-            aria-label={`Aller à l'image de fond ${index + 1}`}
+            aria-label={`${t("goToBackgroundImage")} ${index + 1}`}
           />
         ))}
       </div>
@@ -117,23 +117,38 @@ export default function Hero() {
       </div>
 
       {/* Content - positioned above background with proper z-index */}
-      <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-30 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Modern Booking Form */}
-          <AnimatedSection animation="fadeInUp" delay={200} persistent={true}>
-            <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-2xl p-6 border border-white/20 mb-6">
-              <h1 className="text-xl font-bold text-gray-900 mb-6">{t("heroTitle")}</h1>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-2xl p-4 sm:p-6 border border-white/20 mb-4 sm:mb-6">
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center sm:text-left"
+              >
+                {t("heroTitle")}
+              </motion.h1>
 
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {/* Retrait et retour */}
-                <AnimatedSection animation="fadeInUp" delay={400}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                >
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">{t("pickupReturn")}</label>
                     <select
                       name="agence"
                       value={formData.agence}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 transition-colors text-gray-600 text-sm"
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 transition-colors text-gray-600 text-sm"
                     >
                       {agences.map((agence) => (
                         <option key={agence} value={agence}>
@@ -142,11 +157,15 @@ export default function Hero() {
                       ))}
                     </select>
                   </div>
-                </AnimatedSection>
+                </motion.div>
 
                 {/* Dates et heures */}
-                <AnimatedSection animation="fadeInUp" delay={600}>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                >
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">{t("departureDateTime")}</label>
                       <div className="space-y-2">
@@ -155,14 +174,14 @@ export default function Hero() {
                           name="dateDepart"
                           value={formData.dateDepart}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 transition-colors font-semibold text-sm"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 transition-colors font-semibold text-sm"
                         />
                         <input
                           type="time"
                           name="heureDepart"
                           value={formData.heureDepart}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 transition-colors font-semibold text-sm"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 transition-colors font-semibold text-sm"
                         />
                       </div>
                     </div>
@@ -175,84 +194,107 @@ export default function Hero() {
                           name="dateRetour"
                           value={formData.dateRetour}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 transition-colors font-semibold text-sm"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 transition-colors font-semibold text-sm"
                         />
                         <input
                           type="time"
                           name="heureRetour"
                           value={formData.heureRetour}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 transition-colors font-semibold text-sm"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 border-b-2 border-gray-300 bg-transparent focus:outline-none focus:border-blue-500 transition-colors font-semibold text-sm"
                         />
                       </div>
                     </div>
 
-                    <div className="flex items-end">
-                      <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div className="flex items-end sm:col-span-2 lg:col-span-1">
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 sm:py-4 text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
                         {t("seeOffers")}
                       </Button>
                     </div>
                   </div>
-                </AnimatedSection>
+                </motion.div>
 
                 {/* Appliquer un tarif Prime */}
-                <AnimatedSection animation="fadeInUp" delay={800}>
-                  <div className="pt-4 border-t border-gray-200">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                >
+                  <div className="pt-3 sm:pt-4 border-t border-gray-200">
                     <button className="text-purple-600 hover:text-purple-700 font-medium text-sm flex items-center space-x-1 transition-colors duration-300">
                       <span>▶</span>
                       <span>{t("applyPrimeRate")}</span>
                     </button>
                   </div>
-                </AnimatedSection>
+                </motion.div>
               </div>
             </div>
-          </AnimatedSection>
+          </motion.div>
 
-          {/* Service Features - Positioned as separate container below booking form */}
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br> 
-          <AnimatedSection animation="fadeInUp" delay={1000} persistent={true}>
-          <div className="flex flex-row justify-center items-center gap-32 p">
-  {/* Élément 1 */}
-  <div className="flex items-center gap-2">
-    <span className="text-green-500 font-bold text-xl">✓</span>
-    <span className="text-white font-bold text-lg whitespace-nowrap">
-      À votre service depuis 2008
-    </span>
-  </div>
+          {/* Service Features - Responsive layout */}
+          <div className="mt-16 lg:mt-24">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <div className="flex flex-row justify-center items-center gap-8 lg:gap-16 px-4">
+                {/* Élément 1 */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.9 }}
+                  className="flex items-center gap-2 w-1/4 text-center"
+                >
+                  <span className="text-green-500 font-bold text-xl">✓</span>
+                  <span className="text-white font-bold text-base lg:text-lg">
+                    {t("serviceSince2003")}
+                  </span>
+                </motion.div>
 
-  {/* Élément 2 */}
-  <div className="flex items-center gap-2">
-    <span className="text-green-500 font-bold text-xl">✓</span>
-    <span className="text-white font-bold text-lg whitespace-nowrap">
-      Kilométrage illimité gratuit
-    </span>
-  </div>
+                {/* Élément 2 */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.0 }}
+                  className="flex items-center gap-2 w-1/4 text-center"
+                >
+                  <span className="text-green-500 font-bold text-xl">✓</span>
+                  <span className="text-white font-bold text-base lg:text-lg">
+                    {t("unlimitedMileage")}
+                  </span>
+                </motion.div>
 
-  {/* Élément 3 */}
-  <div className="flex items-center gap-2">
-    <span className="text-green-500 font-bold text-xl">✓</span>
-    <span className="text-white font-bold text-lg whitespace-nowrap">
-      Garantie du modèle choisi
-    </span>
-  </div>
+                {/* Élément 3 */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.1 }}
+                  className="flex items-center gap-2 w-1/4 text-center"
+                >
+                  <span className="text-green-500 font-bold text-xl">✓</span>
+                  <span className="text-white font-bold text-base lg:text-lg">
+                    {t("modelGuarantee")}
+                  </span>
+                </motion.div>
 
-  {/* Élément 4 */}
-  <div className="flex items-center gap-2">
-    <span className="text-green-500 font-bold text-xl">✓</span>
-    <span className="text-white font-bold text-lg whitespace-nowrap">
-      Assistance 24H/24
-    </span>
-  </div>
-</div>
-</AnimatedSection>
-
-          {/* Current slide title overlay */}
-          
+                {/* Élément 4 */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.2 }}
+                  className="flex items-center gap-2 w-1/4 text-center"
+                >
+                  <span className="text-green-500 font-bold text-xl">✓</span>
+                  <span className="text-white font-bold text-base lg:text-lg">
+                    {t("assistance24h")}
+                  </span>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-)
+    </section>
+  )
 }

@@ -16,7 +16,7 @@ export default function ClientProvider({ children }: ClientProviderProps) {
 
   if (!isClient) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white" suppressHydrationWarning>
         {/* Placeholder content for SSR */}
         <div className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200">
           <nav className="max-w-full px-8">

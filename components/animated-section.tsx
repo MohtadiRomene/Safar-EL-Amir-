@@ -1,84 +1,112 @@
 "use client"
 
-import type React from "react"
-import { useEffect, useRef, useState } from "react"
+import React from "react"
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
 
 interface AnimatedSectionProps {
   children: React.ReactNode
-  animation?: "fadeInUp" | "fadeInLeft" | "fadeInRight" | "scaleIn"
+  animation?: "fadeInUp" | "fadeInLeft" | "fadeInRight" | "fadeInDown" | "zoomIn" | "slideInUp" | "slideInLeft" | "slideInRight" | "scaleIn"
   delay?: number
+  duration?: number
   className?: string
-  persistent?: boolean // New prop for persistent animations
+  threshold?: number
+  triggerOnce?: boolean
 }
 
 export default function AnimatedSection({
   children,
   animation = "fadeInUp",
   delay = 0,
+  duration = 0.8,
   className = "",
-  persistent = false,
+  threshold = 0.1,
+  triggerOnce = true,
 }: AnimatedSectionProps) {
-  const [isVisible, setIsVisible] = useState(false)
-  const [hasAnimated, setHasAnimated] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { 
+    once: triggerOnce,
+    amount: threshold,
+    margin: "0px 0px -100px 0px"
+  })
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (!hasAnimated || persistent) {
-            setTimeout(() => {
-              setIsVisible(true)
-              if (!persistent) {
-                setHasAnimated(true)
-              }
-            }, delay)
-          }
-        } else if (persistent) {
-          // Reset animation when element goes out of view (for persistent mode)
-          setIsVisible(false)
+  // Get initial and animate values based on animation type
+  const getAnimationProps = () => {
+    const baseProps = {
+      initial: { opacity: 0 },
+      animate: isInView ? { opacity: 1 } : { opacity: 0 },
+      transition: { duration, delay, ease: "easeOut" }
+    }
+
+    switch (animation) {
+      case "fadeInUp":
+        return {
+          initial: { opacity: 0, y: 50 },
+          animate: isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 },
+          transition: { duration, delay, ease: "easeOut" }
         }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      },
-    )
-
-    if (ref.current) {
-      observer.observe(ref.current)
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current)
-      }
-    }
-  }, [delay, hasAnimated, persistent])
-
-  // Listen for scroll to top to re-trigger animations
-  useEffect(() => {
-    if (persistent) {
-      const handleScroll = () => {
-        if (window.scrollY === 0) {
-          setIsVisible(false)
-          setTimeout(() => setIsVisible(true), 100)
+      case "fadeInLeft":
+        return {
+          initial: { opacity: 0, x: -50 },
+          animate: isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 },
+          transition: { duration, delay, ease: "easeOut" }
         }
-      }
-
-      window.addEventListener('scroll', handleScroll)
-      return () => window.removeEventListener('scroll', handleScroll)
+      case "fadeInRight":
+        return {
+          initial: { opacity: 0, x: 50 },
+          animate: isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 },
+          transition: { duration, delay, ease: "easeOut" }
+        }
+      case "fadeInDown":
+        return {
+          initial: { opacity: 0, y: -50 },
+          animate: isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 },
+          transition: { duration, delay, ease: "easeOut" }
+        }
+      case "zoomIn":
+        return {
+          initial: { opacity: 0, scale: 0.95 },
+          animate: isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 },
+          transition: { duration, delay, ease: "easeOut" }
+        }
+      case "slideInUp":
+        return {
+          initial: { opacity: 0, y: 100 },
+          animate: isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 },
+          transition: { duration, delay, ease: "easeOut" }
+        }
+      case "slideInLeft":
+        return {
+          initial: { opacity: 0, x: -100 },
+          animate: isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 },
+          transition: { duration, delay, ease: "easeOut" }
+        }
+      case "slideInRight":
+        return {
+          initial: { opacity: 0, x: 100 },
+          animate: isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 },
+          transition: { duration, delay, ease: "easeOut" }
+        }
+      case "scaleIn":
+        return {
+          initial: { opacity: 0, scale: 0.9 },
+          animate: isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 },
+          transition: { duration, delay, ease: "easeOut" }
+        }
+      default:
+        return baseProps
     }
-  }, [persistent])
+  }
+
+  const animationProps = getAnimationProps()
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={`transition-all duration-800 ease-out ${
-        isVisible ? `animate-${animation} opacity-100` : "opacity-0 translate-y-8"
-      } ${className}`}
+      {...animationProps}
+      className={className}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }

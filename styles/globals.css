@@ -87,4 +87,25 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Masquer la scrollbar horizontale */
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  /* Masquer la scrollbar horizontale sur tous les éléments */
+  * {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  
+  /* Masquer la scrollbar pour WebKit (Chrome, Safari, Edge) */
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Masquer spécifiquement la scrollbar horizontale */
+  *::-webkit-scrollbar:horizontal {
+    display: none;
+  }
 }
