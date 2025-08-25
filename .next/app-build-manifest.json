@@ -11,15 +11,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/avis-clients/page": [
+    "/agences/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/avis-clients/page.js"
-    ],
-    "/programme-prime/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/programme-prime/page.js"
+      "static/chunks/app/agences/page.js"
     ]
   }
 }

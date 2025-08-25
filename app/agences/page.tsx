@@ -6,6 +6,7 @@ import Footer from "../../components/footer"
 import { useLanguage } from "../../components/header"
 import { MapPin, Phone, Clock, Plane, Building2 } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export default function AgencesPage() {
   const { t } = useLanguage()
@@ -136,7 +137,7 @@ export default function AgencesPage() {
             {/* Left Content */}
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                {t("agenciesTitle")} <span className="text-red-600">Safar El Amir</span>
+                {t("aboutTitle")} <span className="text-[rgb(255,18,54)] font-[750] ">Safar El Amir</span>
               </h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>{t("aboutP1")}</p>
@@ -160,18 +161,19 @@ export default function AgencesPage() {
               </div>
             </div>
 
-            {/* Right Images Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              {officeImages.map((image, index) => (
-                <div key={index} className="aspect-square rounded-lg overflow-hidden shadow-md">
-                  <img
-                    src={image || "/placeholder.svg"}
-                    alt={`Bureau Safar El Amir ${index + 1}`}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
+            {/* Single Centered Image */}
+            <div className="flex justify-center">
+              <div className="w-full max-w-lg relative">
+                <Image
+                  src="/images/about-image-group2 (3).webp"
+                  alt="Bureau Safar El Amir"
+                  width={500}
+                  height={375}
+                  className="w-full h-auto rounded-lg shadow-sm object-contain"
+                  priority
+                  quality={85}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -181,8 +183,8 @@ export default function AgencesPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              {t("agenciesTitle")} <span className="text-red-600">Safar El Amir</span>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 ">
+            {t("agenciesSectionTitle")} <span className="text-[rgb(255,18,54)] font-[750] ">Safar El Amir</span> {t("inAlgeria")}
             </h2>
           </div>
 
@@ -222,40 +224,7 @@ export default function AgencesPage() {
 
       {/* CTA Section */}
 
-      {/* Map and Locations Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("weArePresentTitle")}</h2>
-          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Locations List */}
-            <div className="space-y-4">
-              {locations.map((location, index) => (
-                <div key={index} className="flex items-center space-x-3">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0"></div>
-                  <Link href="#" className="text-blue-600 hover:text-blue-800 transition-colors duration-200">
-                    {location}
-                  </Link>
-                </div>
-              ))}
-            </div>
-
-            {/* Map */}
-            <div className="relative">
-              <div className="bg-gray-100 rounded-lg h-96 flex items-center justify-center">
-                <img
-                  src="/placeholder.svg?height=400&width=600"
-                  alt="Carte de l'Algérie avec les agences Safar El Amir"
-                  className="w-full h-full object-contain rounded-lg"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>

@@ -62,6 +62,9 @@ const translations = {
     agenciesTitle: "Les agences Safar el Amir en Algérie",
     agenciesSubtitle: "11 Agences à votre service en Algérie",
     selectAgency: "Sélectionnez une agence",
+    aboutTitle: "A propos de",
+    agenciesSectionTitle: "Les agences",
+    inAlgeria: "en Algérie",
     findAgencyBtn: "Trouver une agence",
 
     // Reviews section
@@ -262,6 +265,9 @@ const translations = {
     agenciesSubtitle: "11 Agencies at your service in Algeria",
     selectAgency: "Select an agency",
     findAgencyBtn: "Find an agency",
+    aboutTitle: "About",
+    agenciesSectionTitle: "The agencies",
+    inAlgeria: "in Algeria",
 
     // Reviews section
     reviewsTitle: "What our customers say",
