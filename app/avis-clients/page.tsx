@@ -1,9 +1,14 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+"use client"
+
+import React from "react"
+import Header from "../../components/header"
+import Footer from "../../components/footer"
+import { useLanguage } from "../../components/header"
 import { Star, User, Calendar } from "lucide-react"
 import Link from "next/link"
 
 export default function AvisClientsPage() {
+  const { t } = useLanguage()
   const testimonials = [
     {
       name: "Hafid LAIB",
@@ -144,13 +149,13 @@ export default function AvisClientsPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Témoignages clients</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{t("reviewsTitle")}</h1>
             <nav className="flex items-center justify-center space-x-2 text-sm">
               <Link href="/" className="hover:text-blue-600 transition-colors text-gray-600">
-                Accueil
+                /
               </Link>
               <span className="text-gray-400">›</span>
-              <span className="text-gray-600">Témoignages clients</span>
+              <span className="text-gray-600">{t("reviews")}</span>
             </nav>
           </div>
         </div>
@@ -190,39 +195,7 @@ export default function AvisClientsPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-gray-50 rounded-lg shadow-lg p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Notre Satisfaction Client</h3>
 
-            <div className="flex items-center justify-center space-x-4 mb-6">
-              <div className="flex items-center space-x-2">
-                <div className="flex space-x-1">{renderStars(5)}</div>
-                <span className="text-2xl font-bold text-gray-900">4.8/5</span>
-              </div>
-              <div className="border-l border-gray-300 pl-4">
-                <span className="text-lg text-gray-600">Basé sur plus de 1,000 avis</span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">98%</div>
-                <div className="text-gray-600">Clients satisfaits</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">20+</div>
-                <div className="text-gray-600">Années d'expérience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">15,000+</div>
-                <div className="text-gray-600">Clients servis</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>

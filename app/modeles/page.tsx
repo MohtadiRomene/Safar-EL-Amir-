@@ -1,13 +1,15 @@
 "use client"
 
-import { useState } from "react"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+import React, { useState } from "react"
+import Header from "../../components/header"
+import Footer from "../../components/footer"
+import { useLanguage } from "../../components/header"
 import { Fuel, Settings } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button } from "../../components/ui/button"
 import Link from "next/link"
 
 export default function ModelesPage() {
+  const { t } = useLanguage()
   const [activeFilter, setActiveFilter] = useState("Tous les modèles")
 
   const filters = ["Tous les modèles", "Essence", "Diesel", "Boîte Automatique", "Boîte Manuelle"]
@@ -122,13 +124,13 @@ export default function ModelesPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Nos modèles</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{t("allModels")}</h1>
             <nav className="flex items-center justify-center space-x-2 text-sm">
               <Link href="/" className="hover:text-blue-600 transition-colors text-gray-600">
-                Accueil
+                /
               </Link>
               <span className="text-gray-400">›</span>
-              <span className="text-gray-600">Nos modèles</span>
+              <span className="text-gray-600">{t("models")}</span>
             </nav>
           </div>
         </div>
@@ -214,7 +216,7 @@ export default function ModelesPage() {
                     <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 bg-white">
                       Équipements
                     </Button>
-                    <Button className="bg-blue-600 hover:bg-blue-700 text-white">Prix & disponibilité</Button>
+                    <Button className="bg-blue-600 hover:bg-blue-700 text-white">{t("seeOffers")}</Button>
                   </div>
                 </div>
               </div>

@@ -1,99 +1,104 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
+"use client"
+
+import React from "react"
+import Header from "../../components/header"
+import Footer from "../../components/footer"
+import { useLanguage } from "../../components/header"
 import { MapPin, Phone, Clock, Plane, Building2 } from "lucide-react"
 import Link from "next/link"
 
 export default function AgencesPage() {
+  const { t } = useLanguage()
   const agencies = [
     {
-      name: "Agence Oran ville",
+      name: `${t("agencyLabel")} Oran ${t("cityLabel")}`,
       type: "city",
-      address: "51, Avenue Emir Khaled (face à la poste)",
-      hours: "Du Samedi au Jeudi : 08H30 à 17H00",
+      address: t("addressOranCity"),
+      hours: t("hoursCity"),
       icon: Building2,
     },
     {
-      name: "Agence Alger ville",
+      name: `${t("agencyLabel")} Alger ${t("cityLabel")}`,
       type: "city",
-      address: "Centre Commercial city center les banniers",
-      hours: "Du Samedi au Jeudi : 08H30 à 17H00",
+      address: t("addressAlgerCity"),
+      hours: t("hoursCity"),
       icon: Building2,
     },
     {
       name: "Oran",
       type: "airport",
-      address: "Aéroport Ahmed Ben Bella",
-      hours: "7J / 7 24H/24",
+      address: `${t("airportLabel")} Ahmed Ben Bella`,
+      hours: t("hours247"),
       icon: Plane,
     },
     {
       name: "Tlemcen",
       type: "airport",
-      address: "Aéroport Messali El Hadj",
-      hours: "7J / 7 24H/24",
+      address: `${t("airportLabel")} Messali El Hadj`,
+      hours: t("hours247"),
       icon: Plane,
     },
     {
       name: "Alger",
       type: "airport",
-      address: "Aéroport Houari Boumediene",
-      hours: "7J / 7 24H/24",
+      address: `${t("airportLabel")} Houari Boumediene`,
+      hours: t("hours247"),
       icon: Plane,
     },
     {
       name: "Constantine",
       type: "airport",
-      address: "Aéroport Mohamed Boudiaf",
-      hours: "7J / 7 24H/24",
+      address: `${t("airportLabel")} Mohamed Boudiaf`,
+      hours: t("hours247"),
       icon: Plane,
     },
     {
       name: "Batna",
       type: "airport",
-      address: "Aéroport Mostafa Benboulaid",
-      hours: "7J / 7 24H/24",
+      address: `${t("airportLabel")} Mostafa Benboulaid`,
+      hours: t("hours247"),
       icon: Plane,
     },
     {
       name: "Béjaïa",
       type: "airport",
-      address: "Aéroport Abane Ramdane",
-      hours: "7J / 7 24H/24",
+      address: `${t("airportLabel")} Abane Ramdane`,
+      hours: t("hours247"),
       icon: Plane,
     },
     {
       name: "Sétif",
       type: "airport",
-      address: "Aéroport 08 Mai 1945",
-      hours: "7J / 7 24H/24",
+      address: `${t("airportLabel")} 08 Mai 1945`,
+      hours: t("hours247"),
       icon: Plane,
     },
     {
       name: "Annaba",
       type: "airport",
-      address: "Aéroport Rabah Bitat",
-      hours: "7J / 7 24H/24",
+      address: `${t("airportLabel")} Rabah Bitat`,
+      hours: t("hours247"),
       icon: Plane,
     },
     {
       name: "Jijel",
       type: "airport",
-      address: "Aéroport Ferhat Abbas",
-      hours: "7J / 7 24H/24",
+      address: `${t("airportLabel")} Ferhat Abbas`,
+      hours: t("hours247"),
       icon: Plane,
     },
   ]
 
   const locations = [
-    "Location de voiture à Alger Houari Boumediene",
-    "Location de voiture à Oran Ahmed Ben Bella",
-    "Location de voiture à Constantine Mohamed Boudiaf",
-    "Location de voiture à Tlemcen Messali Hadj",
-    "Location de voiture à Annaba Rabah Bitat",
-    "Location de voiture à Batna Mostepha Ben Boulaid",
-    "Location de voiture à Sétif 8 MAI 1945",
-    "Location de voiture à Béjaïa Soummam Abane Ramdane",
-    "Location de voiture à Jijel Ferhat Abbas",
+    t("agencyAlger"),
+    t("agencyOran"),
+    t("agencyConstantine"),
+    t("agencyTlemcen"),
+    t("agencyAnnaba"),
+    t("agencyBatna"),
+    t("agencySetif"),
+    t("agencyBejaia"),
+    t("agencyJijel"),
   ]
 
   const officeImages = [
@@ -111,13 +116,14 @@ export default function AgencesPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Nos agences</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{t("agenciesTitle")}</h1>
             <nav className="flex items-center justify-center space-x-2 text-sm">
               <Link href="/" className="hover:text-blue-600 transition-colors text-gray-600">
-                Accueil
+                {/* No explicit key for Home; keep label minimal */}
+                /
               </Link>
               <span className="text-gray-400">›</span>
-              <span className="text-gray-600">Nos agences</span>
+              <span className="text-gray-600">{t("agencies")}</span>
             </nav>
           </div>
         </div>
@@ -130,27 +136,17 @@ export default function AgencesPage() {
             {/* Left Content */}
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                À propos de <span className="text-red-600">Safar El Amir</span>
+                {t("agenciesTitle")} <span className="text-red-600">Safar El Amir</span>
               </h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
-                <p>
-                  Safar El Amir est une société familiale fondée en 2003 qui est vite devenue le loueur de voiture
-                  préféré et incontournable en Algérie. Pourquoi ? Car nous travaillons chaque jour très dur pour
-                  améliorer la qualité de l'expérience vécue par nos clients qui nous ont accordé leur précieuse
-                  confiance. Cela implique une remise en cause régulière au niveau de tous nos départements afin de
-                  réinventer notre beau métier chaque jour.
-                </p>
-                <p>
-                  Safar El Amir est une marque premium qui a été choisie par plus de 15 000 clients durant nos 20 ans
-                  d'expérience et à travers nos 11 agences en Algérie. Safar El Amir a été à plusieurs reprises citée et
-                  récompensée par les plus grands guides touristiques européens tels que Le petit futé et Le routard.
-                </p>
-                <p className="font-semibold text-gray-900">Vous êtes prêt à faire le premier pas ?</p>
+                <p>{t("aboutP1")}</p>
+                <p>{t("aboutP2")}</p>
+                <p className="font-semibold text-gray-900">{t("aboutCta")}</p>
               </div>
 
               {/* Contact Section */}
               <div className="mt-12">
-                <h3 className="text-2xl font-bold text-blue-600 mb-6 text-center">Nos conseillers clients</h3>
+                <h3 className="text-2xl font-bold text-blue-600 mb-6 text-center">{t("serviceClient")}</h3>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <div className="flex items-center space-x-3 bg-gray-50 p-4 rounded-lg">
                     <Phone className="h-6 w-6 text-blue-600" />
@@ -186,7 +182,7 @@ export default function AgencesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Les agences <span className="text-red-600">Safar El Amir</span> en Algérie
+              {t("agenciesTitle")} <span className="text-red-600">Safar El Amir</span>
             </h2>
           </div>
 
@@ -230,7 +226,7 @@ export default function AgencesPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Nous sommes présent un peu partout en Algérie</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("weArePresentTitle")}</h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
