@@ -37,19 +37,12 @@ export default function ProgrammePrimePage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="bg-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
-          <div className="text-center">
-            <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-2 md:mb-3">
-              {t("primeHeroTitle")}
-            </h1>
-            <nav className="flex items-center justify-center space-x-2 text-xs md:text-sm text-gray-600">
-              <Link href="/" className="hover:text-blue-600 transition-colors">/</Link>
-              <span className="text-gray-400">›</span>
-              <span>{t("prime")}</span>
-            </nav>
-          </div>
-        </div>
+      <section className="relative bg-cover bg-center bg-no-repeat min-h-[25vh]">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/ProgrammePrime.webp')" }}
+        ></div>
       </section>
 
       {/* Main Content Section */}

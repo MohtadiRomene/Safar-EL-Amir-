@@ -13,6 +13,9 @@ export default function ModelesPage() {
   const { t } = useLanguage()
   const [fuelFilter, setFuelFilter] = useState("Tous")
   const [transmissionFilter, setTransmissionFilter] = useState("Tous")
+  const [selectedVehicle, setSelectedVehicle] = useState<any>(null)
+  const [showEquipmentModal, setShowEquipmentModal] = useState(false)
+  const [showBookingModal, setShowBookingModal] = useState(false)
 
   // Custom Vehicle Image Component with error handling
   const VehicleImage = ({ vehicle }: { vehicle: any }) => {
@@ -52,6 +55,15 @@ export default function ModelesPage() {
       fuel: "E",
       transmission: "A",
       category: ["Essence", "Boîte Automatique"],
+      equipment: [
+        "1.6 essence",
+        "Direction assistée",
+        "Climatisation",
+        "Verrouillage centralisé",
+        "Radio CD Mp3 avec sortie USB+Bluetooth",
+        "Vitres avant électriques",
+        "Double airbags"
+      ]
     },
     {
       name: "PEUGEOT 301 Allure HDI",
@@ -60,6 +72,15 @@ export default function ModelesPage() {
       fuel: "E",
       transmission: "A",
       category: ["Essence", "Boîte Automatique"],
+      equipment: [
+        "1.6 essence",
+        "Direction assistée",
+        "Climatisation",
+        "Verrouillage centralisé",
+        "Radio CD Mp3 avec sortie USB+Bluetooth",
+        "Vitres avant électriques",
+        "Double airbags"
+      ]
     },
     {
       name: "DACIA STEPWAY Gps",
@@ -68,6 +89,15 @@ export default function ModelesPage() {
       fuel: "E",
       transmission: "A",
       category: ["Essence", "Boîte Automatique"],
+      equipment: [
+        "1.6 essence",
+        "Direction assistée",
+        "Climatisation",
+        "Verrouillage centralisé",
+        "Radio CD Mp3 avec sortie USB+Bluetooth",
+        "Vitres avant électriques",
+        "Double airbags"
+      ]
     },
     {
       name: "FIAT 500 X",
@@ -76,6 +106,15 @@ export default function ModelesPage() {
       fuel: "E",
       transmission: "M",
       category: ["Essence", "Boîte Manuelle"],
+      equipment: [
+        "1.6 essence",
+        "Direction assistée",
+        "Climatisation",
+        "Verrouillage centralisé",
+        "Radio CD Mp3 avec sortie USB+Bluetooth",
+        "Vitres avant électriques",
+        "Double airbags"
+      ]
     },
     {
       name: "SEAT ARONA fR",
@@ -84,6 +123,15 @@ export default function ModelesPage() {
       fuel: "D",
       transmission: "M",
       category: ["Diesel", "Boîte Manuelle"],
+      equipment: [
+        "1.6 essence",
+        "Direction assistée",
+        "Climatisation",
+        "Verrouillage centralisé",
+        "Radio CD Mp3 avec sortie USB+Bluetooth",
+        "Vitres avant électriques",
+        "Double airbags"
+      ]
     },
     {
       name: "RENAULT CLIO 5 DCI",
@@ -92,6 +140,15 @@ export default function ModelesPage() {
       fuel: "E",
       transmission: "A",
       category: ["Essence", "Boîte Automatique"],
+      equipment: [
+        "1.6 essence",
+        "Direction assistée",
+        "Climatisation",
+        "Verrouillage centralisé",
+        "Radio CD Mp3 avec sortie USB+Bluetooth",
+        "Vitres avant électriques",
+        "Double airbags"
+      ]
     },
   ]
 
@@ -120,19 +177,12 @@ export default function ModelesPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{t("allModels")}</h1>
-            <nav className="flex items-center justify-center space-x-2 text-sm">
-              <Link href="/" className="hover:text-blue-600 transition-colors text-gray-600">
-                /
-              </Link>
-              <span className="text-gray-400">›</span>
-              <span className="text-gray-600">{t("models")}</span>
-            </nav>
-          </div>
-        </div>
+      <section className="relative bg-cover bg-center bg-no-repeat min-h-[25vh]">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/Nosmodeles.webp.webp')" }}
+        ></div>
       </section>
 
       {/* Filters Section */}
@@ -221,10 +271,22 @@ export default function ModelesPage() {
 
                   {/* Action Buttons */}
                   <div className="grid grid-cols-2 gap-2">
-                    <Button className="action-button-secondary text-gray-700">
+                    <Button 
+                      className="action-button-secondary text-gray-700"
+                      onClick={() => {
+                        setSelectedVehicle(vehicle)
+                        setShowEquipmentModal(true)
+                      }}
+                    >
                       Équipements
                     </Button>
-                    <Button className="action-button-primary text-white">
+                    <Button 
+                      className="action-button-primary text-white"
+                      onClick={() => {
+                        setSelectedVehicle(vehicle)
+                        setShowBookingModal(true)
+                      }}
+                    >
                       Prix & disponibilité
                     </Button>
                   </div>
@@ -241,6 +303,134 @@ export default function ModelesPage() {
           )}
         </div>
       </section>
+
+      {/* Equipment Modal */}
+      {showEquipmentModal && selectedVehicle && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full p-6 relative">
+            {/* Header */}
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-bold text-gray-900">Équipements</h3>
+              <button
+                onClick={() => setShowEquipmentModal(false)}
+                className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
+              >
+                ×
+              </button>
+            </div>
+
+            {/* Equipment List */}
+            <div className="space-y-3">
+              {selectedVehicle.equipment.map((item, index) => (
+                <div key={index} className="flex items-center space-x-3">
+                  <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-700">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Return Button */}
+            <div className="mt-6 text-right">
+              <button
+                onClick={() => setShowEquipmentModal(false)}
+                className="flex items-center space-x-2 text-purple-600 hover:text-purple-700 font-medium"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+                </svg>
+                <span>Retour</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Booking Modal */}
+      {showBookingModal && selectedVehicle && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-lg w-full p-6 relative">
+            {/* Header */}
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-bold text-gray-900">{selectedVehicle.name}</h3>
+              <button
+                onClick={() => setShowBookingModal(false)}
+                className="text-gray-400 hover:text-gray-600 text-2xl font-bold"
+              >
+                ×
+              </button>
+            </div>
+
+            {/* Pickup and Return Section */}
+            <div className="mb-6">
+              <h4 className="font-semibold text-gray-900 mb-3">Retrait et retour</h4>
+              <div className="bg-gray-50 p-3 rounded-lg mb-3">
+                <span className="text-blue-600 underline">Oran - Aéroport Ahmed Ben Bella</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <input type="checkbox" id="returnSameLocation" className="rounded" defaultChecked />
+                <label htmlFor="returnSameLocation" className="text-sm text-gray-700">
+                  Retour au lieu de retrait
+                </label>
+              </div>
+            </div>
+
+            {/* Departure Details */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Date & heure de départ
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  type="date"
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                  defaultValue="2025-08-28"
+                />
+                <input
+                  type="time"
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                  defaultValue="10:00"
+                />
+              </div>
+            </div>
+
+            {/* Return Details */}
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Date & heure de retour
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  type="date"
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                  defaultValue="2025-09-01"
+                />
+                <input
+                  type="time"
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+                  defaultValue="10:00"
+                />
+              </div>
+            </div>
+
+            {/* Action Section */}
+            <div className="flex justify-between items-center">
+              <button className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+                <span>Appliquer un tarif Prime</span>
+              </button>
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">
+                Voir les offres
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
       <WhatsAppWidget />

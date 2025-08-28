@@ -146,19 +146,12 @@ export default function AvisClientsPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">{t("reviewsTitle")}</h1>
-            <nav className="flex items-center justify-center space-x-2 text-sm">
-              <Link href="/" className="hover:text-blue-600 transition-colors text-gray-600">
-                /
-              </Link>
-              <span className="text-gray-400">›</span>
-              <span className="text-gray-600">{t("reviews")}</span>
-            </nav>
-          </div>
-        </div>
+      <section className="relative bg-cover bg-center bg-no-repeat min-h-[25vh]">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/Avisclients.webp')" }}
+        ></div>
       </section>
 
       {/* Testimonials Grid */}

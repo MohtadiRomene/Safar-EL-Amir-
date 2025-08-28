@@ -89,13 +89,7 @@ export default function VehicleCarousel() {
       transmission: "A",
       type: "ESSENCE",
     },
-    {
-      name: "DACIA DUSTER EXTREME",
-      image: "/images/Dacia.jpg",
-      fuel: "D",
-      transmission: "A",
-      type: "DIESEL",
-    }
+  
   ]
 
   const filteredVehicles = vehicles.filter((vehicle) => {
