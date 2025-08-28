@@ -19,22 +19,18 @@ export default function Hero() {
 
   const backgroundImages = [
     {
-      src: "/images/hero-slider-bridge.jpg",
+      src: "/images/hero-slider-bridge.webp",
       alt: t("backgroundImage1"),
       title: t("backgroundImage1")
     },
+   
     {
-      src: "/images/hero-slider-monument.jpg", 
-      alt: t("backgroundImage2"),
-      title: t("backgroundImage2")
-    },
-    {
-      src: "/images/hero-slider-port.jpg",
+      src: "/images/hero-slider-port.webp",
       alt: t("backgroundImage3"),
       title: t("backgroundImage3")
     },
     {
-      src: "/images/tower.jpg",
+      src: "/images/tower.webp",
       alt: t("backgroundImage4"),
       title: t("backgroundImage4")
     }

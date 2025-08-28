@@ -13,6 +13,32 @@ export default function VehicleCarousel() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const isMobile = useIsMobile()
 
+  // Custom Vehicle Image Component with error handling
+  const VehicleImage = ({ vehicle }: { vehicle: any }) => {
+    const [imageError, setImageError] = useState(false)
+
+    if (imageError) {
+      return (
+        <div className="w-full h-32 sm:h-40 flex items-center justify-center bg-gray-100 rounded-lg">
+          <div className="text-center">
+            <div className="text-3xl text-gray-400 mb-2">🚗</div>
+            <div className="text-xs text-gray-500 font-medium">{vehicle.name}</div>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <img
+        src={vehicle.image}
+        alt={vehicle.name}
+        className="w-full h-32 sm:h-40 object-cover rounded-lg transition-transform duration-500 hover:scale-110"
+        loading="lazy"
+        onError={() => setImageError(true)}
+      />
+    )
+  }
+
   const filters = [
     { id: "ESSENCE", label: "ESSENCE" },
     { id: "DIESEL", label: "DIESEL" },
@@ -22,99 +48,50 @@ export default function VehicleCarousel() {
 
   const vehicles = [
     {
-      name: "CHERY TIGO 2 PRO",
-      image: "/images/tigo1.jpg",
-      fuel: "E",
-      transmission: "A",
-      type: "ESSENCE",
-    },
-    {
-      name: "RENAULT TALIENT",
-      image: "/images/Renault Talient.jpg",
-      fuel: "E",
-      transmission: "A",
-      type: "ESSENCE",
-    },
-    {
-      name: "Dacia Duster JOURNEY",
-      image: "/images/Dacia.jpg",
-      fuel: "E",
-      transmission: "A",
-      type: "ESSENCE",
-    },
-    {
-      name: "PEUGEOT 208",
-      image: "/placeholder.svg?height=200&width=300&text=PEUGEOT+208",
-      fuel: "D",
-      transmission: "M",
-      type: "DIESEL",
-    },
-    {
-      name: "VOLKSWAGEN GOLF",
-      image: "/placeholder.svg?height=200&width=300&text=VOLKSWAGEN+GOLF",
-      fuel: "D",
-      transmission: "A",
-      type: "DIESEL",
-    },
-    {
-      name: "RENAULT MEGANE SEDAN",
-      image: "/placeholder.svg?height=200&width=300&text=RENAULT+MEGANE+SEDAN",
+      name: "RENAULT CLIO 5 DCI",
+      image: "/images/clio.webp",
       fuel: "E",
       transmission: "A",
       type: "ESSENCE",
     },
     {
       name: "FIAT 500 X",
-      image: "/placeholder.svg?height=200&width=300&text=FIAT+500+X",
+      image: "/images/fiat.webp",
+      fuel: "E",
+      transmission: "M",
+      type: "ESSENCE",
+    },
+    {
+      name: "RENAULT SYMBOL",
+      image: "/images/symbol11.webp",
+      fuel: "E",
+      transmission: "A",
+      type: "ESSENCE",
+    },
+    {
+      name: "DACIA STEPWAY Gps",
+      image: "/images/Dacia.webp",
       fuel: "E",
       transmission: "A",
       type: "ESSENCE",
     },
     {
       name: "SEAT ARONA FR",
-      image: "/placeholder.svg?height=200&width=300&text=SEAT+ARONA+FR",
+      image: "/images/arona.webp",
+      fuel: "D",
+      transmission: "M",
+      type: "DIESEL",
+    },
+    {
+      name: "PEUGEOT 301 Allure HDI",
+      image: "/images/30121.webp",
       fuel: "E",
       transmission: "A",
       type: "ESSENCE",
     },
     {
-      name: "DACIA LODGY 7 Places",
-      image: "/placeholder.svg?height=200&width=300&text=DACIA+LODGY+7+PLACES",
-      fuel: "D",
-      transmission: "M",
-      type: "DIESEL",
-    },
-    {
-      name: "RENAULT CLIO 4 DCI",
-      image: "/placeholder.svg?height=200&width=300&text=RENAULT+CLIO+4+DCI",
-      fuel: "D",
-      transmission: "M",
-      type: "DIESEL",
-    },
-    {
-      name: "DACIA DUSTER DCI",
-      image: "/placeholder.svg?height=200&width=300&text=DACIA+DUSTER+DCI",
-      fuel: "D",
-      transmission: "M",
-      type: "DIESEL",
-    },
-    {
-      name: "PEUGEOT TRAVELER 9 places",
-      image: "/placeholder.svg?height=200&width=300&text=PEUGEOT+TRAVELER+9+PLACES",
-      fuel: "D",
-      transmission: "M",
-      type: "DIESEL",
-    },
-    {
-      name: "RENAULT KANGOO",
-      image: "/placeholder.svg?height=200&width=300&text=RENAULT+KANGOO",
-      fuel: "D",
-      transmission: "M",
-      type: "DIESEL",
-    },
-    {
       name: "DACIA DUSTER EXTREME",
-      image: "/placeholder.svg?height=200&width=300&text=DACIA+DUSTER+EXTREME",
+      image: "/images/Dacia.jpg",
       fuel: "D",
       transmission: "A",
       type: "DIESEL",
@@ -203,12 +180,7 @@ export default function VehicleCarousel() {
                       {vehicle.name}
                     </h3>
                     <div className="p-3 sm:p-4 mb-2 sm:mb-3 transition-all duration-300 hover:shadow-lg">
-                      <img
-                        src={vehicle.image || "/placeholder.svg"}
-                        alt={vehicle.name}
-                        className="w-full h-32 sm:h-40 object-contain mx-auto transition-transform duration-500 hover:scale-110"
-                        loading="lazy"
-                      />
+                      <VehicleImage vehicle={vehicle} />
                     </div>
                     <div className="flex justify-center space-x-2 sm:space-x-3">
                       <div className="flex items-center space-x-1 px-2 py-1 rounded-full transition-all duration-300 hover:scale-105">

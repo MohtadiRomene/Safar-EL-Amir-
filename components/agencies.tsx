@@ -74,7 +74,7 @@ export default function Agencies() {
           <AnimatedSection animation="fadeInRight" delay={300}>
             <div className="relative flex justify-center items-center">
               <img
-                src="/images/map-alger-static.jpg"
+                src="/images/map-alger-static.webp"
                 alt="Carte statique de l'Algérie"
                 className="w-full max-w-sm sm:max-w-md h-auto object-contain transition-transform duration-700 hover:scale-105"
                 loading="lazy"

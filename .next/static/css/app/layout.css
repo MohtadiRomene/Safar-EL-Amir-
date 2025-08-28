@@ -1492,17 +1492,9 @@ video {
 .rounded-sm {
   border-radius: calc(var(--radius) - 4px);
 }
-.rounded-l-lg {
-  border-top-left-radius: var(--radius);
-  border-bottom-left-radius: var(--radius);
-}
 .rounded-l-md {
   border-top-left-radius: calc(var(--radius) - 2px);
   border-bottom-left-radius: calc(var(--radius) - 2px);
-}
-.rounded-r-lg {
-  border-top-right-radius: var(--radius);
-  border-bottom-right-radius: var(--radius);
 }
 .rounded-r-md {
   border-top-right-radius: calc(var(--radius) - 2px);
@@ -1884,6 +1876,10 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.py-2\.5 {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 .pb-3 {
   padding-bottom: 0.75rem;
@@ -2375,6 +2371,51 @@ video {
   --cell-size: var(--spacing(8));
 }
 
+/* Vehicle card styles */
+.vehicle-card {
+  transition: all 0.3s ease-in-out;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Year badge styles */
+.year-badge {
+  background: linear-gradient(135deg, #9333ea, #7c3aed);
+  box-shadow: 0 2px 4px rgba(147, 51, 234, 0.2);
+}
+
+/* Spec icons styles */
+.spec-icon {
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  border: 1px solid #d1d5db;
+}
+
+/* Action button styles */
+.action-button-primary {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+.action-button-primary:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-1px);
+}
+
+.action-button-secondary {
+  background: white;
+  border: 1px solid #d1d5db;
+  transition: all 0.2s ease-in-out;
+}
+
+.action-button-secondary:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
 .file\:border-0::file-selector-button {
   border-width: 0px;
 }
@@ -2584,11 +2625,6 @@ video {
 .hover\:text-blue-700:hover {
   --tw-text-opacity: 1;
   color: rgb(29 78 216 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-blue-800:hover {
-  --tw-text-opacity: 1;
-  color: rgb(30 64 175 / var(--tw-text-opacity, 1));
 }
 
 .hover\:text-foreground:hover {
@@ -3662,6 +3698,10 @@ video {
     gap: 2rem;
   }
 
+  .sm\:gap-3 {
+    gap: 0.75rem;
+  }
+
   .sm\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -3991,6 +4031,11 @@ video {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  .lg\:px-10 {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 
   .lg\:pr-4 {
