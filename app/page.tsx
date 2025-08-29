@@ -10,6 +10,8 @@ import WhatsAppWidget from "../components/whatsapp-widget"
 import ClientProvider from "../components/client-provider"
 import AnimatedSection from "../components/animated-section"
 
+export const revalidate = 3600
+
 export default function Home() {
   return (
     <ClientProvider>

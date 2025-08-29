@@ -606,7 +606,7 @@ export default function Header() {
           <div className="fixed top-0 left-0 right-0 bg-white shadow-xl transform transition-transform duration-300 ease-in-out h-full overflow-y-auto">
             <div className="flex items-center justify-between p-4 border-b">
               <img 
-                src="/images/safar-el-amir-logo.png" 
+                src="/images/safar-el-amir-logo.png " 
                 alt="Safar El Amir" 
                 className="h-8 w-auto" 
               />

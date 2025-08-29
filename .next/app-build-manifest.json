@@ -11,25 +11,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-    "/avis-clients/page": [
+    "/modeles/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/avis-clients/page.js"
+      "static/chunks/app/modeles/page.js"
     ],
     "/agences/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/agences/page.js"
     ],
+    "/avis-clients/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/avis-clients/page.js"
+    ],
     "/programme-prime/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/programme-prime/page.js"
-    ],
-    "/modeles/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/modeles/page.js"
     ]
   }
 }
